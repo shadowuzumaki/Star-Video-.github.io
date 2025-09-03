@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Video Player - Premium Streaming</title>
+    <link rel="stylesheet" href="player-styles.css">
+    <link rel="shortcut icon" href="Images/Logo/Title.jpeg" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Loading Movie...</h2>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="player-header">
+        <div class="nav container">
+            <a href="index.html" class="logo">
+                Star<span>Video</span>
+            </a>
+            <div class="header-controls">
+                <button class="quality-btn" id="qualityBtn">HD</button>
+                <button class="fullscreen-btn" id="fullscreenBtn">
+                    <i class='bx bx-fullscreen'></i>
+                </button>
+                <button class="close-btn" onclick="window.close()">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Movie Player -->
+    <div class="player-container" id="playerContainer">
+        <div class="video-wrapper">
+            <video id="moviePlayer" poster="Images/movie-1.jpg">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            
+            <!-- Custom Controls -->
+            <div class="video-controls" id="videoControls">
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-filled" id="progressFilled"></div>
+                        <div class="progress-handle" id="progressHandle"></div>
+                    </div>
+                    <div class="time-display">
+                        <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+                    </div>
+                </div>
+                
+                <div class="control-buttons">
+                    <div class="left-controls">
+                        <button class="control-btn" id="playPauseBtn">
+                            <i class='bx bx-play'></i>
+                        </button>
+                        <button class="control-btn" id="rewindBtn">
+                            <i class='bx bx-rewind'></i>
+                        </button>
+                        <button class="control-btn" id="forwardBtn">
+                            <i class='bx bx-fast-forward'></i>
+                        </button>
+                        <div class="volume-control">
+                            <button class="control-btn" id="volumeBtn">
+                                <i class='bx bx-volume-full'></i>
+                            </button>
+                            <div class="volume-slider">
+                                <input type="range" id="volumeSlider" min="0" max="100" value="100">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="right-controls">
+                        <button class="control-btn" id="speedBtn">1x</button>
+                        <button class="control-btn" id="subtitleBtn">
+                            <i class='bx bx-captions'></i>
+                        </button>
+                        <button class="control-btn" id="settingsBtn">
+                            <i class='bx bx-cog'></i>
+                        </button>
+                        <button class="control-btn" id="fullscreenToggle">
+                            <i class='bx bx-fullscreen'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Overlay -->
+            <div class="video-loading" id="videoLoading">
+                <div class="loading-spinner"></div>
+            </div>
+
+            <!-- Play Button Overlay -->
+            <div class="play-overlay" id="playOverlay">
+                <button class="big-play-btn" id="bigPlayBtn">
+                    <i class='bx bx-play'></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Movie Info -->
+        <div class="movie-info">
+            <div class="movie-details">
+                <h1 class="movie-title">Jumanji: Welcome to the Jungle</h1>
+                <div class="movie-meta">
+                    <span class="year">2017</span>
+                    <span class="rating">PG-13</span>
+                    <span class="duration">119 min</span>
+                    <span class="genre">Action, Adventure, Comedy</span>
+                </div>
+                <p class="movie-description">
+                    Four teenagers are sucked into a magical video game, and the only way they can escape is to work together to finish the game.
+                </p>
+                <div class="movie-actions">
+                    <button class="action-btn primary">
+                        <i class='bx bx-play'></i>
+                        Watch Now
+                    </button>
+                    <button class="action-btn secondary">
+                        <i class='bx bx-plus'></i>
+                        My List
+                    </button>
+                    <button class="action-btn secondary">
+                        <i class='bx bx-share'></i>
+                        Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="settings-modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Player Settings</h3>
+                <button class="close-modal" id="closeModal">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label>Quality</label>
+                    <select id="qualitySelect">
+                        <option value="auto">Auto</option>
+                        <option value="1080p">1080p HD</option>
+                        <option value="720p">720p HD</option>
+                        <option value="480p">480p</option>
+                        <option value="360p">360p</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label>Playback Speed</label>
+                    <select id="speedSelect">
+                        <option value="0.5">0.5x</option>
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>1x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label>Subtitles</label>
+                    <select id="subtitleSelect">
+                        <option value="off">Off</option>
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <script src="player-script.js"></script>
+</body>
+</html>
